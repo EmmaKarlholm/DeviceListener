@@ -48,7 +48,7 @@ public class AudioController
             speakers,
             AudioClientShareMode.Shared,
             useEventSync: false,
-            latency: 20
+            latency: 50
         );
 
         playback.Init(_waveProvider);
