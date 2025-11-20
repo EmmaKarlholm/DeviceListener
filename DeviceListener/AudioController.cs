@@ -147,6 +147,7 @@ public class AudioController
                     break;
 
                 default:
+                    presses = 0;
                     break;
             }
 
