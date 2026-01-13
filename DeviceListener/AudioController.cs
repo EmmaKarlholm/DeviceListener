@@ -34,12 +34,13 @@ public class AudioController
         return devices;
     }
 
-    public string[] GetInputDeviceNameList()
+    public string[] GetDeviceNameList(MMDeviceCollection devices)
     {
-        string[] deviceNames = new string[InputDevices.Count];
-        for (int i = 0; i < InputDevices.Count; i++)
+        string[] deviceNames = new string[devices.Count];
+
+        for (int i = 0; i < devices.Count; i++)
         {
-            deviceNames[i] = InputDevices[i].FriendlyName;
+            deviceNames[i] = devices[i].FriendlyName;
         }
 
         return deviceNames;
