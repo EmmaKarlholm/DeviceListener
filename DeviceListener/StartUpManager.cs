@@ -60,8 +60,7 @@ namespace DeviceListener
 
             controller.Listen(inputChoice, outputChoice);
 
-            Console.WriteLine($"inputChoice is {inputChoice}");
-            Console.WriteLine($"outputChoice is {outputChoice}");
+            Environment.Exit(0);
         }
     }
 }
