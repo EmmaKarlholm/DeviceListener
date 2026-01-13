@@ -3,9 +3,25 @@
     "DeviceListener": {
       "commandName": "Project"
     },
-    "Output2 Input0": {
+    "Help": {
       "commandName": "Project",
-      "commandLineArgs": "--output 2 --input 0"
+      "commandLineArgs": "--help"
+    },
+    "Input0 Output0": {
+      "commandName": "Project",
+      "commandLineArgs": "--input 0 --output 0"
+    },
+    "Input0": {
+      "commandName": "Project",
+      "commandLineArgs": "--input 0"
+    },
+    "Output0": {
+      "commandName": "Project",
+      "commandLineArgs": "--output 0"
+    },
+    "Bad Input": {
+      "commandName": "Project",
+      "commandLineArgs": "--input badInput"
     }
   }
 }
