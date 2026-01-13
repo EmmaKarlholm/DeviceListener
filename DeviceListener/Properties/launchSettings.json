@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "DeviceListener": {
+      "commandName": "Project"
+    },
+    "Output2 Input0": {
+      "commandName": "Project",
+      "commandLineArgs": "--output 2 --input 0"
+    }
+  }
+}
