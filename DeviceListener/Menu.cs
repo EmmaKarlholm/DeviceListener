@@ -10,7 +10,7 @@ namespace DeviceListener
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
-            Console.Write($"  {text}\n");
+            Console.Write($"  {text}\n\n");
         }
 
         public static int UserChoice(string[] devices)
