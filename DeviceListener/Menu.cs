@@ -6,6 +6,13 @@ namespace DeviceListener
 {
     public static class Menu
     {
+        public static void DrawHeader(string text)
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.Write($"  {text}\n");
+        }
+
         public static int UserChoice(string[] devices)
         {
             int selectedIndex = 0;
