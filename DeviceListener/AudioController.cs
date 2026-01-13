@@ -49,7 +49,6 @@ public class AudioController
     public void Listen(int deviceNumber, int outputDeviceNumber)
     {
         var speakers = OutputDevices[outputDeviceNumber];
-            //DeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
 
         using var capture = new WasapiCapture(InputDevices[deviceNumber]);
 
