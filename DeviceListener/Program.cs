@@ -1,4 +1,8 @@
-﻿namespace DeviceListener
+﻿using Microsoft.Extensions.Configuration;
+using NAudio.Dmo.Effect;
+using System.ComponentModel;
+
+namespace DeviceListener
 {
     internal class Program
     {
@@ -6,22 +10,91 @@
         {
             AudioController controller = new AudioController();
 
+
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
+
+
+
+
+            //if  ((!int.TryParse(config["output"], out int outputChoice))
+            //    || !int.TryParse(config["input"], out int inputChoice))
+            //{
+            //    Console.WriteLine("At least one of them could not be parsed, will handle as if no input");
+            //}
+
+            int inputChoice;
+            int outputChoice;
+
+            bool inputArgValid = int.TryParse(config["input"], out inputChoice);
+            bool outputArgValid = int.TryParse(config["output"], out outputChoice);
+
+            if (inputArgValid
+                && outputArgValid
+                && inputChoice < controller.InputDevices.Count
+                && outputChoice < controller.InputDevices.Count)
+            {
+                controller.Listen(inputChoice, outputChoice);
+            }
+
+            //Console.WriteLine("input " + config["input"]);
+            //Console.WriteLine("output " + config["output"]);
+
+
+            //Console.WriteLine($"inputChoice = {inputChoice}");
+            //Console.WriteLine($"outputChocie = {outputChoice}");
+
+            //string inputArg = config["input"]!;
+            //string outputArg = config["output"]!;
+
+
+
+
+
+
+
+            //bool wasSuccessful = int.TryParse(inputArg, out int inputChoice);
+            //int outputChoice = 0;
+            //if (wasSuccessful)
+            //{
+            //    wasSuccessful = int.TryParse(outputArg, out outputChoice);
+            //}
+
+            //if (wasSuccessful)
+            //{
+            //    Console.WriteLine("Both could be parsed into integers");
+            //}
+
+
+            //Console.WriteLine(inputArg);
+            //Console.WriteLine(outputArg);
+
+            inputChoice = Menu.UserChoice(controller.GetInputDeviceNameList());
+
+
+            Console.ReadKey(true);
+            Console.ReadKey(true);
+            Console.ReadKey(true);
+            Console.ReadKey(true);
+
             int userSelection = 0;
             if (args.Length == 0)
             {
                 Console.WriteLine("Please select an audio input device to listen to.\n");
-                userSelection = Menu.UserChoice(controller.GetInputDeviceNameList());
+                //userSelection = Menu.UserChoice(controller.GetDeviceNameList());
             }
             else if (args.Length == 1)
             {
                 bool wasNumber = int.TryParse(args[0], out int deviceNumber);
-                if (wasNumber && deviceNumber < controller.Devices.Count)
+                if (wasNumber && deviceNumber < controller.InputDevices.Count)
                 {
                     userSelection = deviceNumber;
                 }
             }
 
-            controller.Listen(userSelection);
+            //controller.Listen(userSelection);
         }
     }
 }
