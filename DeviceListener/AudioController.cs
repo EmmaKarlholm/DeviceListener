@@ -7,7 +7,8 @@ using NAudio.Wave.SampleProviders;
 public class AudioController
 {
 
-    public MMDeviceCollection Devices { get; private set; }
+    public MMDeviceCollection InputDevices { get; private set; }
+    public MMDeviceCollection OutputDevices { get; private set; }
     public MMDeviceEnumerator DeviceEnumerator { get; private set; }
     private BufferedWaveProvider? _waveProvider = null!;
     private VolumeSampleProvider? _volumeProvider = null!;
@@ -17,7 +18,8 @@ public class AudioController
     public AudioController()
     {
         DeviceEnumerator = new MMDeviceEnumerator();
-        Devices = GetInputDeviceList();
+        InputDevices = GetInputDeviceList();
+        OutputDevices = GetOutputDeviceList();
     }
 
     public MMDeviceCollection GetInputDeviceList()
@@ -26,22 +28,29 @@ public class AudioController
         return devices;
     }
 
+    public MMDeviceCollection GetOutputDeviceList()
+    {
+        var devices = DeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
+        return devices;
+    }
+
     public string[] GetInputDeviceNameList()
     {
-        string[] deviceNames = new string[Devices.Count];
-        for (int i = 0; i < Devices.Count; i++)
+        string[] deviceNames = new string[InputDevices.Count];
+        for (int i = 0; i < InputDevices.Count; i++)
         {
-            deviceNames[i] = Devices[i].FriendlyName;
+            deviceNames[i] = InputDevices[i].FriendlyName;
         }
 
         return deviceNames;
     }
 
-    public void Listen(int deviceNumber)
+    public void Listen(int deviceNumber, int outputDeviceNumber)
     {
-        var speakers = DeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
+        var speakers = OutputDevices[outputDeviceNumber];
+            //DeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
 
-        using var capture = new WasapiCapture(Devices[deviceNumber]);
+        using var capture = new WasapiCapture(InputDevices[deviceNumber]);
 
         _waveProvider = new BufferedWaveProvider(capture.WaveFormat);
 
