@@ -15,6 +15,23 @@ namespace DeviceListener
 
         public static void ParseArguments(string[] args, AudioController controller)
         {
+            foreach (var entry in args)
+            {
+                if (entry == "help"
+                    || entry == "-help"
+                    || entry == "--help"
+                    || entry == "h"
+                    || entry == "-h"
+                    || entry == "--h"
+                    || entry == "?"
+                    || entry == "-?"
+                    || entry == "--?")
+                {
+                    HelpScreen.Display();
+                    Environment.Exit(0);
+                }
+            }
+
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
