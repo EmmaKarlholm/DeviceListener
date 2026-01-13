@@ -8,37 +8,7 @@ namespace DeviceListener
     {
         static void Main(string[] args)
         {
-            AudioController controller = new AudioController();
-
-
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .Build();
-
-
-
-
-
-            //if  ((!int.TryParse(config["output"], out int outputChoice))
-            //    || !int.TryParse(config["input"], out int inputChoice))
-            //{
-            //    Console.WriteLine("At least one of them could not be parsed, will handle as if no input");
-            //}
-
-            int inputChoice;
-            int outputChoice;
-
-            bool inputArgValid = int.TryParse(config["input"], out inputChoice);
-            bool outputArgValid = int.TryParse(config["output"], out outputChoice);
-
-            if (inputArgValid
-                && outputArgValid
-                && inputChoice < controller.InputDevices.Count
-                && outputChoice < controller.InputDevices.Count)
-            {
-                controller.Listen(inputChoice, outputChoice);
-            }
-
+            StartUpManager.Boot(args);
             //Console.WriteLine("input " + config["input"]);
             //Console.WriteLine("output " + config["output"]);
 
@@ -71,28 +41,22 @@ namespace DeviceListener
             //Console.WriteLine(inputArg);
             //Console.WriteLine(outputArg);
 
-            inputChoice = Menu.UserChoice(controller.GetInputDeviceNameList());
 
-
-            Console.ReadKey(true);
-            Console.ReadKey(true);
-            Console.ReadKey(true);
-            Console.ReadKey(true);
-
-            int userSelection = 0;
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Please select an audio input device to listen to.\n");
-                //userSelection = Menu.UserChoice(controller.GetDeviceNameList());
-            }
-            else if (args.Length == 1)
-            {
-                bool wasNumber = int.TryParse(args[0], out int deviceNumber);
-                if (wasNumber && deviceNumber < controller.InputDevices.Count)
-                {
-                    userSelection = deviceNumber;
-                }
-            }
+            //inputChoice = Menu.UserChoice(controller.GetInputDeviceNameList());
+            //int userSelection = 0;
+            //if (args.Length == 0)
+            //{
+            //    Console.WriteLine("Please select an audio input device to listen to.\n");
+            //    //userSelection = Menu.UserChoice(controller.GetDeviceNameList());
+            //}
+            //else if (args.Length == 1)
+            //{
+            //    bool wasNumber = int.TryParse(args[0], out int deviceNumber);
+            //    if (wasNumber && deviceNumber < controller.InputDevices.Count)
+            //    {
+            //        userSelection = deviceNumber;
+            //    }
+            //}
 
             //controller.Listen(userSelection);
         }
