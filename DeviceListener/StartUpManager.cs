@@ -27,7 +27,17 @@ namespace DeviceListener
                     || entry == "-?"
                     || entry == "--?")
                 {
-                    HelpScreen.Display();
+                    TextScreen.Help();
+                    Environment.Exit(0);
+                }
+
+                if (entry == "list"
+                    || entry == "-list"
+                    || entry == "--list")
+                {
+                    string[] inputDevices = controller.GetDeviceNameList(controller.InputDevices);
+                    string[] outputDevices = controller.GetDeviceNameList(controller.OutputDevices);
+                    TextScreen.List(inputDevices, outputDevices);
                     Environment.Exit(0);
                 }
             }
@@ -46,16 +56,16 @@ namespace DeviceListener
                 || inputChoice < 0 
                 || inputChoice >= controller.InputDevices.Count)
             {
-            Menu.DrawHeader("Please select an input device. (the device being recorded)");
-            inputChoice = Menu.UserChoice(controller.GetDeviceNameList(controller.InputDevices));                
+                Menu.DrawHeader("Please select an input device. (the device being recorded)");
+                inputChoice = Menu.UserChoice(controller.GetDeviceNameList(controller.InputDevices));                
             }
 
             if (!outputArgIsInteger
                 || outputChoice < 0
                 || outputChoice >= controller.OutputDevices.Count)
             {
-            Menu.DrawHeader("Please select an output device (the device where you listen)");
-            outputChoice = Menu.UserChoice(controller.GetDeviceNameList(controller.OutputDevices));
+                Menu.DrawHeader("Please select an output device (the device where you listen)");
+                outputChoice = Menu.UserChoice(controller.GetDeviceNameList(controller.OutputDevices));
             }
 
             controller.Listen(inputChoice, outputChoice);
