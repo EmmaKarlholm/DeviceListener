@@ -27,7 +27,17 @@ namespace DeviceListener
                     || entry == "-?"
                     || entry == "--?")
                 {
-                    HelpScreen.Display();
+                    TextScreen.Help();
+                    Environment.Exit(0);
+                }
+
+                if (entry == "list"
+                    || entry == "-list"
+                    || entry == "--list")
+                {
+                    string[] inputDevices = controller.GetDeviceNameList(controller.InputDevices);
+                    string[] outputDevices = controller.GetDeviceNameList(controller.OutputDevices);
+                    TextScreen.List(inputDevices, outputDevices);
                     Environment.Exit(0);
                 }
             }

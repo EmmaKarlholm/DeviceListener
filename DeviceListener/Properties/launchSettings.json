@@ -22,6 +22,10 @@
     "Bad Input": {
       "commandName": "Project",
       "commandLineArgs": "--input badInput"
+    },
+    "List": {
+      "commandName": "Project",
+      "commandLineArgs": "--list"
     }
   }
 }
