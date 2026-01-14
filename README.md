@@ -4,7 +4,9 @@ A program which allows you to play back the live input of an audio device. Usefu
 ## Usage
 Simply start the program to see a menu of input audio devices on your system. Use the arrow keys (or W/S) to select an input device and it will be played through the output device you select in the subsequent menu.
 
-It is possible to skip the menus to go directly to listening. Supply either or both an `--input 0` and/or `--output 0` argument to immediately set the application to use the stated input and/or output device. Start the program normally to see which numbers correspond to which device on your system.
+It is possible to skip the menus to go directly to listening. Supply either or both an `--input #` and/or `--output #` argument (where # refers to an audio device number) to immediately set the application to use the stated input and/or output device.
+
+To learn which of your audio devices have which device numbers, run the program using `--list` or start the program normally to see which numbers correspond to which device on your system.
 
 There is also a `--help` command to list help on how to use command line arguments from within your terminal.
 
